@@ -1,0 +1,134 @@
+:root{
+  --primary: #A64029;      /* Rempah Merah Tua */
+  --secondary: #DFAF2B;    /* Kunyit Hangat */
+  --accent: #4E5B31;       /* Daun Hijau Tua */
+  --bg: #F4E8D1;           /* Krem Santan */
+  --text-primary: #3B2F2F; /* Cokelat Kopi */
+  --text-secondary: #6E5849;/* Cokelat Susu */
+  --accent-light: #E2903A; /* Oranye Teralis */
+  --radius: 10px;
+  --maxw: 1000px;
+}
+
+/* Reset sederhana */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background-color: var(--bg);
+  color:var(--text-primary);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.4;
+  background-image: url('indonesia-map.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* wrapper */
+.container{
+  max-width:var(--maxw);
+  margin: 2.25rem auto;
+  padding:1rem;
+  background: rgba(244,232,209,0.92);
+  border-radius:14px;
+  box-shadow: 0 8px 30px rgba(23,18,12,0.08);
+}
+
+/* app header (x-nav.app-header) */
+.app-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(4px);
+}
+.logo-container{display:flex;align-items:center;gap:10px}
+.logo{height:48px;width:48px;object-fit:contain;border-radius:6px}
+.brand-title{font-size:1.1rem;color:var(--primary);font-weight:700;margin:0}
+
+.app-nav a{
+  margin-left:0.75rem;
+  color:var(--text-primary);
+  text-decoration:none;
+  font-weight:600;
+}
+.app-nav a:hover{color:var(--primary)}
+
+/* header right user */
+.user-name{color:var(--text-primary);font-weight:600}
+
+/* hero */
+.hero{
+  text-align:center;
+  padding:2rem 1rem;
+}
+.hero h1{margin:0 0 0.5rem 0;color:var(--primary)}
+.hero p{margin:0 0 1rem 0;color:var(--text-secondary)}
+.hero .btn{background:var(--accent-light);border:none;padding:0.65rem 1.0rem;border-radius:12px;color:white;font-weight:700;cursor:pointer}
+
+/* quick categories (chips) */
+.chips{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin:1rem 0}
+.chip{
+  background:rgba(78,91,49,0.08);
+  border:1px solid rgba(78,91,49,0.12);
+  color:var(--accent);
+  padding:0.45rem 0.9rem;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:600;
+}
+.chip:focus{outline:3px solid rgba(226,144,58,0.18);outline-offset:3px}
+
+/* grid & card (x-ui/card) */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+
+.card{
+  background:#fff;border-radius:var(--radius);overflow:hidden;
+  box-shadow:0 8px 16px rgba(18,15,11,0.06);
+  display:flex;flex-direction:column;
+}
+.card img{width:100%;height:160px;object-fit:cover}
+.card-body{padding:0.9rem}
+.card-title{margin:0 0 0.25rem 0;color:var(--primary);font-weight:700}
+.card-sub{margin:0 0.5rem 0 0;color:var(--text-secondary);font-size:0.9rem}
+.card-desc{margin:0;color:var(--text-primary)}
+
+/* buttons (x-ui/button) */
+.btn,button{cursor:pointer;border-radius:10px}
+.btn-primary{background:var(--primary);color:white;padding:0.6rem 1rem;border:none;font-weight:700}
+.btn-ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:0.45rem 0.8rem;border-radius:8px}
+
+/* forms (x-ui/input, textarea, select) */
+.form-row{display:flex;flex-direction:column;gap:6px;margin-bottom:0.8rem}
+label{font-weight:600;color:var(--text-secondary);font-size:0.92rem}
+input[type="text"],input[type="email"],input[type="password"],select,textarea{
+  padding:10px;border-radius:8px;border:1px solid #ddd;font-size:0.95rem;
+}
+input:focus,textarea:focus,select:focus{outline:3px solid rgba(226,144,58,0.14);outline-offset:2px}
+
+/* small components */
+.helper{font-size:0.85rem;color:var(--text-secondary)}
+.toast{
+  position:fixed;right:18px;top:18px;padding:10px 14px;background:var(--primary);color:white;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,0.12);display:none;z-index:60
+}
+
+/* avatar upload (x-ui/avatar-upload) */
+.avatar-preview{width:96px;height:96px;border-radius:999px;object-fit:cover;border:3px solid rgba(0,0,0,0.06)}
+.file-row{display:flex;gap:12px;align-items:center}
+
+/* footer (x-nav.app-footer) */
+.app-footer{
+  margin-top:1.25rem;padding:1rem;border-radius:10px;background:linear-gradient(90deg, rgba(78,91,49,0.95), rgba(70,60,40,0.95));
+  color:white;text-align:center
+}
+.footer-logo{height:36px;width:36px;object-fit:contain;border-radius:8px}
+
+/* accessibility focus for interactive cards */
+.card:focus,a:focus,button:focus{outline:3px solid rgba(226,144,58,0.14);outline-offset:3px}

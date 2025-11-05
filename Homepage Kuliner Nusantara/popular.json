@@ -1,0 +1,6 @@
+[
+  {"id":1,"title":"Rendang Padang","region":"Sumatera Barat","image":"https://source.unsplash.com/800x600/?rendang","rating":4.9,"short":"Daging empuk berbalut rempah khas Minang."},
+  {"id":2,"title":"Gudeg Jogja","region":"Yogyakarta","image":"https://source.unsplash.com/800x600/?gudeg","rating":4.7,"short":"Nangka muda manis santan, lauk krecek dan telur."},
+  {"id":3,"title":"Soto Lamongan","region":"Jawa Timur","image":"https://source.unsplash.com/800x600/?soto","rating":4.6,"short":"Kuah bening gurih dengan suwiran ayam dan koya."},
+  {"id":4,"title":"Papeda","region":"Papua","image":"https://source.unsplash.com/800x600/?papeda","rating":4.5,"short":"Bubur sagu khas timur, biasa disajikan dengan ikan kuah kuning."}
+]
