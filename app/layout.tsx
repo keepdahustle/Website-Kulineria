@@ -8,18 +8,19 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Kuliner Nusantara Indonesia - Portal UMKM",
-  description: "Portal UMKM untuk mengelola dan mempromosikan kuliner Indonesia",
+  title: "Kuliner Nusantara Indonesia | Discover Local Cuisine",
+  description: "Jelajahi cita rasa autentik kuliner nusantara dari seluruh kepulauan Indonesia",
   generator: "v0.app",
   openGraph: {
-    title: "Kuliner Nusantara Indonesia - Portal UMKM",
-    description: "Portal UMKM untuk mengelola dan mempromosikan kuliner Indonesia",
+    title: "Kuliner Nusantara Indonesia",
+    description: "Jelajahi cita rasa autentik kuliner nusantara dari seluruh kepulauan Indonesia",
+    type: "website",
     images: [
       {
-        url: "/Logo-Kuliner-Nusantara.png",
+        url: "/Logo-Kuliner Nusantara Indonesia.png",
         width: 1200,
-        height: 1200,
-        alt: "Kuliner Nusantara Logo",
+        height: 630,
+        alt: "Kuliner Nusantara Indonesia",
       },
     ],
   },
@@ -31,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="id" suppressHydrationWarning>
+    <html lang="id">
       <body className={`font-sans antialiased`}>
         {children}
         <Analytics />
