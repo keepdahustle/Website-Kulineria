@@ -1,0 +1,154 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Kuliner Nusantara Color Palette */
+  --rempah-merah: #a64029;
+  --kunyit-hangat: #dfaf2b;
+  --daun-hijau: #4e5b31;
+  --krem-santan: #f4e8d1;
+  --kopi-cokelat: #3b2f2f;
+  --cokelat-susu: #6e5849;
+  --oranye-teralis: #e2903a;
+
+  /* Design System */
+  --background: #f4e8d1;
+  --foreground: #3b2f2f;
+  --card: #fff9f0;
+  --card-foreground: #3b2f2f;
+  --popover: #fff9f0;
+  --popover-foreground: #3b2f2f;
+  --primary: #a64029;
+  --primary-foreground: #ffffff;
+  --secondary: #dfaf2b;
+  --secondary-foreground: #3b2f2f;
+  --accent: #4e5b31;
+  --accent-foreground: #ffffff;
+  --muted: #e2d4c8;
+  --muted-foreground: #6e5849;
+  --accent-light: #e2903a;
+  --destructive: #a64029;
+  --destructive-foreground: #ffffff;
+  --border: #e2d4c8;
+  --input: #fff9f0;
+  --ring: #dfaf2b;
+  --chart-1: #a64029;
+  --chart-2: #dfaf2b;
+  --chart-3: #4e5b31;
+  --chart-4: #e2903a;
+  --chart-5: #6e5849;
+  --radius: 1rem;
+  --sidebar: #f4e8d1;
+  --sidebar-foreground: #3b2f2f;
+  --sidebar-primary: #a64029;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #4e5b31;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e2d4c8;
+  --sidebar-ring: #dfaf2b;
+}
+
+.dark {
+  --background: #2b2520;
+  --foreground: #f4e8d1;
+  --card: #3b3430;
+  --card-foreground: #f4e8d1;
+  --popover: #3b3430;
+  --popover-foreground: #f4e8d1;
+  --primary: #d6664f;
+  --primary-foreground: #1a1410;
+  --secondary: #f0c654;
+  --secondary-foreground: #1a1410;
+  --accent: #7a8b5c;
+  --accent-foreground: #f4e8d1;
+  --muted: #4b4440;
+  --muted-foreground: #c4b5ab;
+  --accent-light: #f5a842;
+  --destructive: #d6664f;
+  --destructive-foreground: #f4e8d1;
+  --border: #4b4440;
+  --input: #3b3430;
+  --ring: #f0c654;
+  --chart-1: #d6664f;
+  --chart-2: #f0c654;
+  --chart-3: #7a8b5c;
+  --chart-4: #f5a842;
+  --chart-5: #c4b5ab;
+  --sidebar: #2b2520;
+  --sidebar-foreground: #f4e8d1;
+  --sidebar-primary: #d6664f;
+  --sidebar-primary-foreground: #f4e8d1;
+  --sidebar-accent: #7a8b5c;
+  --sidebar-accent-foreground: #f4e8d1;
+  --sidebar-border: #4b4440;
+  --sidebar-ring: #f0c654;
+}
+
+@theme inline {
+  --font-sans: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Admin Utilities */
+.toast {
+  @apply fixed bottom-4 right-4 px-4 py-3 rounded-lg text-white font-medium animate-in fade-in-0 slide-in-from-bottom-2 duration-200 z-50;
+}
+
+.toast.success {
+  @apply bg-[#4E5B31];
+}
+
+.toast.error {
+  @apply bg-[#A64029];
+}
+
+.toast.info {
+  @apply bg-[#DFAF2B];
+}
