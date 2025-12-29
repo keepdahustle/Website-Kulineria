@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="id">
-      <body className={`${_lora.variable} ${_poppins.variable} font-sans antialiased`}>
+    <html lang="id" suppressHydrationWarning>
+      <body className={`${_lora.variable} ${_poppins.variable} font-sans antialiased`} suppressHydrationWarning>
         {children}
         <Analytics />
       </body>

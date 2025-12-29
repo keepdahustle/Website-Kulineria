@@ -1,0 +1,16 @@
+{
+  "/admin/kuliner/page": "app/admin/kuliner/page.js",
+  "/admin/login/page": "app/admin/login/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/admin/reviews/page": "app/admin/reviews/page.js",
+  "/admin/umkm-verification/page": "app/admin/umkm-verification/page.js",
+  "/kuliner/[id]/page": "app/kuliner/[id]/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/profile/page": "app/profile/page.js",
+  "/register/page": "app/register/page.js",
+  "/umkm/auth/page": "app/umkm/auth/page.js",
+  "/umkm/page": "app/umkm/page.js",
+  "/umkm/profile/page": "app/umkm/profile/page.js",
+  "/umkm/tambah/page": "app/umkm/tambah/page.js"
+}

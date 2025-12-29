@@ -2,219 +2,128 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { AdminLayout } from "@/components/admin/admin-layout"
-import { loadJSON, type Kuliner, getPageSize } from "@/lib/admin-utils"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { 
+  Utensils, 
+  Search, 
+  Trash2, 
+  ExternalLink, 
+  MapPin, 
+  Store 
+} from "lucide-react"
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { fetchFromApi, API_BASE_URL } from "@/lib/data"
 
-export default function KulinerListPage() {
-  const [kuliner, setKuliner] = useState<Kuliner[]>([])
-  const [filtered, setFiltered] = useState<Kuliner[]>([])
-  const [kategoriFilter, setKategoriFilter] = useState("All")
-  const [provinsiFilter, setProvinsiFilter] = useState("All")
-  const [statusFilter, setStatusFilter] = useState("All")
-  const [page, setPage] = useState(1)
-  const pageSize = getPageSize()
+export default function AdminKulinerListPage() {
+  const [kuliner, setKuliner] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
-    const load = async () => {
-      try {
-        const data = await loadJSON<Kuliner[]>("/mock/admin/kuliner.json")
-        setKuliner(data)
-        setFiltered(data)
-      } catch (err) {
-        console.error("[v0] Load kuliner error:", err)
-      }
-    }
-    load()
+    loadAllCulinaries()
   }, [])
 
-  useEffect(() => {
-    let result = kuliner
-
-    if (kategoriFilter !== "All") {
-      result = result.filter((k) => k.kategori === kategoriFilter)
-    }
-
-    if (provinsiFilter !== "All") {
-      result = result.filter((k) => k.provinsi === provinsiFilter)
-    }
-
-    if (statusFilter !== "All") {
-      result = result.filter((k) => k.status === statusFilter)
-    }
-
-    setFiltered(result)
-    setPage(1)
-  }, [kategoriFilter, provinsiFilter, statusFilter, kuliner])
-
-  const categories = [...new Set(kuliner.map((k) => k.kategori))]
-  const provinsi = [...new Set(kuliner.map((k) => k.provinsi))]
-  const statuses = [...new Set(kuliner.map((k) => k.status))]
-
-  const paginatedData = filtered.slice((page - 1) * pageSize, page * pageSize)
-  const totalPages = Math.ceil(filtered.length / pageSize)
-
-  const handleExportCSV = () => {
-    const headers = ["Title", "Kategori", "Provinsi", "Kota", "Status"]
-    const rows = filtered.map((k) => [k.title, k.kategori, k.provinsi, k.kota, k.status])
-    const csv = [headers, ...rows].map((r) => r.join(",")).join("\n")
-    const blob = new Blob([csv], { type: "text/csv" })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = "kuliner-list.csv"
-    a.click()
-    URL.revokeObjectURL(url)
+  const loadAllCulinaries = async () => {
+    setLoading(true)
+    // Memanggil API Admin khusus untuk melihat semua kuliner
+    const res = await fetchFromApi<any[]>("/admin/culinaries")
+    setKuliner(res || [])
+    setLoading(false)
   }
 
+  const handleDelete = async (id: number) => {
+    if (confirm("Hapus kuliner ini secara permanen dari sistem?")) {
+      const token = localStorage.getItem("auth_token")
+      const res = await fetch(`${API_BASE_URL}/culinaries/${id}`, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` }
+      })
+      if (res.ok) {
+        alert("Berhasil dihapus")
+        loadAllCulinaries()
+      }
+    }
+  }
+
+  const filtered = kuliner.filter(item => 
+    item.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.user?.nama_usaha?.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  if (loading) return <div className="p-10 text-center font-serif text-[#a64029]">Sinkronisasi Data Kuliner Nusantara...</div>
+
   return (
-    <AdminLayout>
-      <div className="space-y-6">
-        {/* Filters */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Filter Kuliner</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div>
-                <label className="block text-sm font-medium mb-2 text-foreground">Kategori</label>
-                <select
-                  value={kategoriFilter}
-                  onChange={(e) => setKategoriFilter(e.target.value)}
-                  className="w-full px-4 py-2 rounded-lg border border-border bg-input text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                >
-                  <option>All</option>
-                  {categories.map((cat) => (
-                    <option key={cat}>{cat}</option>
-                  ))}
-                </select>
-              </div>
+    <div className="space-y-6 font-sans">
+      <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-800">Manajemen Konten Kuliner</h2>
+          <p className="text-gray-500 text-sm">Total {kuliner.length} hidangan terdaftar dari seluruh mitra UMKM.</p>
+        </div>
+        <div className="relative w-full md:w-72">
+          <Search className="absolute left-3 top-2.5 text-gray-400 w-4 h-4" />
+          <input 
+            type="text" 
+            placeholder="Cari makanan atau mitra..."
+            className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#a64029]"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2 text-foreground">Provinsi</label>
-                <select
-                  value={provinsiFilter}
-                  onChange={(e) => setProvinsiFilter(e.target.value)}
-                  className="w-full px-4 py-2 rounded-lg border border-border bg-input text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                >
-                  <option>All</option>
-                  {provinsi.map((prov) => (
-                    <option key={prov}>{prov}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2 text-foreground">Status</label>
-                <select
-                  value={statusFilter}
-                  onChange={(e) => setStatusFilter(e.target.value)}
-                  className="w-full px-4 py-2 rounded-lg border border-border bg-input text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                >
-                  <option>All</option>
-                  {statuses.map((st) => (
-                    <option key={st}>{st}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="flex items-end">
-                <button
-                  onClick={handleExportCSV}
-                  className="w-full px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/90 transition-colors font-medium text-sm"
-                >
-                  📥 Export CSV
-                </button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Kuliner List */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Daftar Kuliner ({filtered.length})</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {filtered.length === 0 ? (
-              <div className="py-12 text-center">
-                <div className="text-5xl mb-4">🍽️</div>
-                <p className="text-muted-foreground">Tidak ada kuliner</p>
-              </div>
-            ) : (
-              <>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="border-b border-border">
-                        <th className="text-left py-3 px-4 font-semibold text-foreground">Title</th>
-                        <th className="text-left py-3 px-4 font-semibold text-foreground">Kategori</th>
-                        <th className="text-left py-3 px-4 font-semibold text-foreground">Provinsi/Kota</th>
-                        <th className="text-left py-3 px-4 font-semibold text-foreground">Status</th>
-                        <th className="text-left py-3 px-4 font-semibold text-foreground">Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {paginatedData.map((k) => (
-                        <tr key={k.id} className="border-b border-border hover:bg-muted/50 transition-colors">
-                          <td className="py-3 px-4 font-medium text-foreground">{k.title}</td>
-                          <td className="py-3 px-4 text-muted-foreground">{k.kategori}</td>
-                          <td className="py-3 px-4 text-muted-foreground">
-                            {k.provinsi} / {k.kota}
-                          </td>
-                          <td className="py-3 px-4">
-                            <span
-                              className={`px-3 py-1 rounded-lg text-xs font-medium ${
-                                k.status === "Published"
-                                  ? "bg-[#4E5B3122] text-[#4E5B31]"
-                                  : "bg-[#E2903A22] text-[#E2903A]"
-                              }`}
-                            >
-                              {k.status}
-                            </span>
-                          </td>
-                          <td className="py-3 px-4">
-                            <Link
-                              href={`/kuliner/${k.slug}`}
-                              className="px-3 py-1 bg-primary text-primary-foreground text-xs rounded hover:bg-primary/90 transition-colors font-medium inline-block"
-                            >
-                              Lihat
-                            </Link>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-
-                {/* Pagination */}
-                <div className="flex items-center justify-between mt-6 pt-6 border-t border-border">
-                  <span className="text-sm text-muted-foreground">
-                    Halaman {page} dari {totalPages}
-                  </span>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setPage((p) => Math.max(1, p - 1))}
-                      disabled={page === 1}
-                      className="px-3 py-2 border border-border rounded-lg hover:bg-muted transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-foreground font-medium text-sm"
-                    >
-                      ← Sebelumnya
-                    </button>
-                    <button
-                      onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                      disabled={page === totalPages}
-                      className="px-3 py-2 border border-border rounded-lg hover:bg-muted transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-foreground font-medium text-sm"
-                    >
-                      Selanjutnya →
+      <div className="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="bg-gray-50 text-gray-400 text-xs uppercase tracking-widest font-bold">
+              <th className="px-6 py-4">Hidangan & Mitra</th>
+              <th className="px-6 py-4">Lokasi</th>
+              <th className="px-6 py-4">Status</th>
+              <th className="px-6 py-4 text-right">Aksi</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100 text-sm">
+            {filtered.map((item) => (
+              <tr key={item.id} className="hover:bg-gray-50 transition-colors">
+                <td className="px-6 py-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gray-100 rounded-lg overflow-hidden relative flex-shrink-0">
+                      <img src={item.images?.[0] || "/placeholder.svg"} alt="" className="object-cover w-full h-full" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-gray-800">{item.nama}</p>
+                      <p className="text-[#4e5b31] text-xs flex items-center gap-1 font-semibold">
+                        <Store size={12} /> {item.user?.nama_usaha || "Mitra Anonim"}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td className="px-6 py-5 text-gray-500">
+                  <div className="flex items-center gap-1"><MapPin size={14}/> {item.kota}, {item.provinsi}</div>
+                </td>
+                <td className="px-6 py-5">
+                  <Badge className="bg-green-50 text-green-700 border-green-100 font-bold uppercase text-[10px]">
+                    {item.status}
+                  </Badge>
+                </td>
+                <td className="px-6 py-5 text-right">
+                  <div className="flex justify-end gap-2">
+                    <Link href={`/kuliner/${item.id}`} target="_blank">
+                      <Button variant="ghost" size="sm" className="text-gray-400 hover:text-[#a64029]"><ExternalLink size={18} /></Button>
+                    </Link>
+                    <button onClick={() => handleDelete(item.id)} className="p-2 text-red-300 hover:text-red-600 transition-colors">
+                      <Trash2 size={18} />
                     </button>
                   </div>
-                </div>
-              </>
-            )}
-          </CardContent>
-        </Card>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {filtered.length === 0 && (
+          <div className="py-20 text-center text-gray-400 font-serif">Belum ada data kuliner yang masuk.</div>
+        )}
       </div>
-    </AdminLayout>
+    </div>
   )
 }

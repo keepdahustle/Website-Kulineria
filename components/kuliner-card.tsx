@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Bookmark, Star } from "lucide-react"
@@ -31,8 +32,9 @@ export function KulinerCard({
 }: KulinerCardProps) {
   const [isSaved, setIsSaved] = useState(false)
 
+  // Fungsi memformat angka ke Rupiah
   const formatPrice = (price?: number) => {
-    if (!price) return ""
+    if (!price && price !== 0) return ""
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
@@ -40,64 +42,79 @@ export function KulinerCard({
     }).format(price)
   }
 
-  const priceRange = hargaMin && hargaMax ? `${formatPrice(hargaMin)} - ${formatPrice(hargaMax)}` : "Harga bervariasi"
+  // FIX: Logika untuk menampilkan Range Harga Asli dari UMKM
+  const displayPrice = () => {
+    if (hargaMin && hargaMax) {
+      if (hargaMin === hargaMax) return formatPrice(hargaMin)
+      return `${formatPrice(hargaMin)} - ${formatPrice(hargaMax)}`
+    } else if (hargaMin) {
+      return formatPrice(hargaMin)
+    } else if (hargaMax) {
+      return formatPrice(hargaMax)
+    }
+    return "Harga Hubungi Mitra"
+  }
 
   return (
-    <div className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-border hover:border-primary/50">
-      <div className="relative w-full h-48 overflow-hidden bg-muted/10">
+    <div className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-[#ddd] flex flex-col h-full font-sans">
+      {/* Visual Area */}
+      <div className="relative w-full h-52 overflow-hidden bg-gray-100">
         <Image
-          src={images[0] || "/placeholder.svg?height=300&width=400&query=kuliner indonesia"}
+          src={images && images.length > 0 ? images[0] : "/placeholder.svg"}
           alt={title}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
-          loading="lazy"
+          className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-      </div>
-
-      <div className="p-4">
-        <div className="flex items-start justify-between mb-2 gap-2">
-          <h3 className="font-bold text-foreground line-clamp-2 flex-1">{title}</h3>
-          <Badge variant="outline" className="whitespace-nowrap text-xs bg-muted/20 text-muted border-muted/30">
+        <div className="absolute top-4 left-4">
+          <Badge className="bg-[#dfaf2b] text-[#3b2f2f] border-none font-black px-3 py-1 shadow-sm uppercase text-[10px] tracking-widest">
             {kategori}
           </Badge>
         </div>
+      </div>
 
-        <p className="text-xs text-muted-foreground mb-3">
-          {kota}, {provinsi}
-        </p>
-
-        <div className="flex items-center gap-1 mb-3">
-          <div className="flex">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`w-3 h-3 ${i < Math.round(rating) ? "fill-accent text-accent" : "text-muted/30"}`}
-              />
-            ))}
+      {/* Content Area */}
+      <div className="p-6 flex flex-col flex-1">
+        <div className="flex justify-between items-start mb-3">
+          <h3 className="font-bold text-[#3b2f2f] text-xl line-clamp-1 tracking-tight">{title}</h3>
+          <div className="flex items-center gap-1.5 bg-[#dfaf2b]/10 px-2 py-1 rounded-lg">
+            <Star className="w-3.5 h-3.5 fill-[#dfaf2b] text-[#dfaf2b]" />
+            <span className="text-xs font-black text-[#3b2f2f]">{rating > 0 ? rating.toFixed(1) : "0.0"}</span>
           </div>
-          <span className="text-xs font-medium text-foreground">{rating.toFixed(1)}</span>
         </div>
 
-        <p className="text-sm font-semibold text-primary mb-4">{priceRange}</p>
+        <p className="text-xs text-[#6e5849] mb-5 flex items-center gap-1.5 font-medium italic">
+          <span className="opacity-70">📍</span> {kota}, {provinsi}
+        </p>
 
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex-1 border-primary/50 text-primary hover:bg-primary/10 bg-transparent"
-          >
-            Detail
-          </Button>
-          <button
-            onClick={() => setIsSaved(!isSaved)}
-            className={`p-2 rounded-lg transition-colors ${
-              isSaved ? "bg-muted/30 text-muted" : "text-muted-foreground hover:text-muted"
-            }`}
-            aria-label={isSaved ? "Remove from saved" : "Add to saved"}
-          >
-            <Bookmark className="w-4 h-4" fill={isSaved ? "currentColor" : "none"} />
-          </button>
+        <div className="mt-auto">
+          {/* PERBAIKAN: Menampilkan Harga Rupiah Numerik */}
+          <div className="mb-5 p-3 bg-[#f4e8d1]/30 rounded-2xl border border-[#a64029]/5">
+            <p className="text-[14px] font-black text-[#a64029] tracking-tighter">
+              {displayPrice()}
+            </p>
+          </div>
+
+          <div className="flex gap-2">
+            <Link href={`/kuliner/${id}`} className="flex-1">
+              <Button
+                variant="outline"
+                className="w-full border-[#a64029] text-[#a64029] hover:bg-[#a64029] hover:text-white transition-all font-bold rounded-2xl py-6"
+              >
+                Lihat Detail
+              </Button>
+            </Link>
+            
+            <button
+              onClick={() => setIsSaved(!isSaved)}
+              className={`p-4 rounded-2xl border transition-all ${
+                isSaved 
+                ? "bg-[#a64029] text-white border-[#a64029] shadow-lg shadow-[#a64029]/20" 
+                : "border-[#ddd] text-[#6e5849] hover:bg-[#f4e8d1]"
+              }`}
+            >
+              <Bookmark className={`w-5 h-5 ${isSaved ? "fill-current" : ""}`} />
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -1,64 +1,123 @@
-// lib/data.ts
-// lib/data.ts
-export async function loadJSON<T>(path: string): Promise<T> {
-  const base =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (typeof window !== "undefined" ? "" : "http://localhost:3000");
+// Path: lib/data.ts
 
-  const url = path.startsWith("http")
-    ? path
-    : `${base}${path.startsWith("/") ? "" : "/"}${path}`;
+export const API_BASE_URL = "http://127.0.0.1:8000/api";
+export const APP_BASE_URL = "http://127.0.0.1:8000";
 
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
-  return res.json();
-}
-
-export async function loadAll() {
+/**
+ * Meminta Cookie CSRF dari Laravel
+ */
+export async function getCsrfToken() {
   try {
-    const [provKota, kategori, kuliner, popular, baru] = await Promise.all([
-      loadJSON<Record<string, string[]>>("/mock/home/provinsi_kota.json"),
-      loadJSON<string[]>("/mock/home/kategori.json"),
-      loadJSON<any[]>("/mock/home/kuliner.json"),
-      loadJSON<string[]>("/mock/home/popular.json"),
-      loadJSON<string[]>("/mock/home/baru.json"),
-    ])
-    return { provKota, kategori, kuliner, popular, baru }
+    await fetch(`${APP_BASE_URL}/sanctum/csrf-cookie`, {
+      method: "GET",
+      credentials: "include",
+    });
   } catch (error) {
-    console.error("Error loading mock data:", error)
-    return { provKota: {}, kategori: [], kuliner: [], popular: [], baru: [] }
+    console.error("Gagal ambil CSRF:", error);
   }
 }
 
-export function getKulinerById(id: string, kuliniarList: any[]) {
-  return kuliniarList.find((item) => item.id === id)
+/**
+ * FIX: Fungsi GET API yang sekarang otomatis bawa Token (Authorization)
+ */
+export async function fetchFromApi<T>(endpoint: string): Promise<T | null> {
+  try {
+    const token = typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
+
+    const res = await fetch(`${API_BASE_URL}${endpoint}`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": token ? `Bearer ${token}` : "", // Kirim token buat akses Admin/UMKM
+      },
+      // credentials: "include" // Penting untuk session cookie
+    });
+
+    if (!res.ok) {
+      console.warn(`Fetch ${endpoint} Gagal: status ${res.status}`);
+      return null;
+    }
+
+    const json = await res.json();
+    return json.success ? json.data : null;
+  } catch (error) {
+    console.error(`API Fetch Error pada ${endpoint}:`, error);
+    return null;
+  }
 }
 
-export function filterKuliner(
-  kuliniarList: any[],
-  filters: {
-    kategori?: string[]
-    maxPrice?: number
-    minRating?: number
-    kota?: string
-    provinsi?: string
-    searchQuery?: string
-  },
-) {
-  return kuliniarList.filter((item) => {
-    if (filters.kategori?.length && !filters.kategori.includes(item.kategori)) return false
-    if (filters.maxPrice && item.hargaMin && item.hargaMin > filters.maxPrice) return false
-    if (filters.minRating && item.rating < filters.minRating) return false
-    if (filters.kota && item.kota !== filters.kota) return false
-    if (filters.provinsi && item.provinsi !== filters.provinsi) return false
-    if (filters.searchQuery) {
-      const q = filters.searchQuery.toLowerCase()
-      return (
-        item.title.toLowerCase().includes(q) ||
-        item.kota.toLowerCase().includes(q) ||
-        item.provinsi.toLowerCase().includes(q)
-      )
-    }
-    return true
-  })
+/**
+ * Fungsi POST API (Bawa CSRF & Token)
+ */
+export async function postToApi(endpoint: string, body: any) {
+  try {
+    await getCsrfToken();
+    const token = typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
+
+    const res = await fetch(`${API_BASE_URL}${endpoint}`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": token ? `Bearer ${token}` : "",
+      },
+      body: JSON.stringify(body),
+      credentials: "include",
+    });
+
+    const json = await res.json();
+    
+    return {
+      status: res.status,
+      success: json.success || (res.status >= 200 && res.status < 300),
+      message: json.message,
+      data: json.data,
+      token: json.token,
+      role: json.role,
+      user: json.user,
+      errors: json.errors
+    };
+  } catch (error) {
+    console.error(`API Post Error pada ${endpoint}:`, error);
+    return { success: false, message: "Gagal terhubung ke server." };
+  }
+}
+
+/**
+ * Fungsi Master Load Homepage
+ */
+export async function loadAllFromDatabase() {
+  try {
+    const dbCulinaries = await fetchFromApi<any[]>("/culinaries");
+    
+    const [resProv, resKat] = await Promise.all([
+      fetch("/mock/home/provinsi_kota.json").then(r => r.json()).catch(() => ({})),
+      fetch("/mock/home/kategori.json").then(r => r.json()).catch(() => [])
+    ]);
+
+    const sanitized = (dbCulinaries || []).map((item: any) => ({
+      ...item,
+      id: item.id.toString(),
+      title: item.nama,
+      rating: parseFloat(item.rating) || 0,
+      images: Array.isArray(item.images) ? item.images : ["/placeholder.svg"]
+    }));
+
+    return {
+      provKota: resProv,
+      kategori: resKat,
+      kuliner: sanitized,
+      popular: sanitized.map((c: any) => c.id),
+      baru: sanitized,
+    };
+  } catch (error) {
+    console.error("Load All Gagal:", error);
+    return { provKota: {}, kategori: [], kuliner: [], popular: [], baru: [] };
+  }
+}
+
+export async function loadJSON<T>(path: string): Promise<T> {
+  const res = await fetch(path);
+  return res.json();
 }
