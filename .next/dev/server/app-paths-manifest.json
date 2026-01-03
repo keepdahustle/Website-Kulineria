@@ -8,6 +8,8 @@
   "/login/page": "app/login/page.js",
   "/page": "app/page.js",
   "/profile/page": "app/profile/page.js",
+  "/profile/visitor/page": "app/profile/visitor/page.js",
+  "/profile/visitor/saved/page": "app/profile/visitor/saved/page.js",
   "/register/page": "app/register/page.js",
   "/umkm/auth/page": "app/umkm/auth/page.js",
   "/umkm/page": "app/umkm/page.js",

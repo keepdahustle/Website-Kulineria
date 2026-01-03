@@ -45,14 +45,14 @@ function Header() {
     };
     // Mencegah Hydration Error
     if (!mounted) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
-        className: "h-[73px] bg-[#f4e8d1] border-b border-[#3b2f2f]/10"
+        className: "h-[56px] bg-[#f4e8d1] border-b border-[#3b2f2f]/10"
     }, void 0, false, {
         fileName: "[project]/components/header.tsx",
         lineNumber: 32,
         columnNumber: 24
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
-        className: "sticky top-0 z-50 bg-[#f4e8d1]/95 backdrop-blur-md border-b border-[#3b2f2f]/10 py-4 font-sans",
+        className: "sticky top-0 z-50 bg-[#f4e8d1]/95 backdrop-blur-md border-b border-[#3b2f2f]/10 py-3 font-sans",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
             className: "container mx-auto px-5 flex justify-between items-center max-w-7xl",
             children: [
@@ -1901,21 +1901,38 @@ function DetailKulinerPage() {
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "flex items-center gap-6 bg-white/30 w-fit p-3 rounded-2xl border border-white",
+                                                        className: "flex items-center gap-4 flex-wrap",
                                                         children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$rating$2d$stars$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                                                rating: Math.round(item.rating)
-                                                            }, void 0, false, {
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                className: "flex items-center gap-2 bg-white/30 px-4 py-2 rounded-2xl border border-white",
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$rating$2d$stars$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                                                        rating: Math.round(item.rating)
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/app/kuliner/[id]/page.tsx",
+                                                                        lineNumber: 152,
+                                                                        columnNumber: 21
+                                                                    }, this),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                        className: "text-sm font-bold text-[#3b2f2f]",
+                                                                        children: item.rating > 0 ? item.rating.toFixed(1) : "0.0"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/app/kuliner/[id]/page.tsx",
+                                                                        lineNumber: 153,
+                                                                        columnNumber: 21
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
                                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
                                                                 lineNumber: 151,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                className: "text-2xl font-bold text-[#3b2f2f]",
+                                                                className: "text-2xl font-bold text-[#3b2f2f] bg-white/30 px-4 py-2 rounded-2xl border border-white",
                                                                 children: item.harga_min ? `Rp ${item.harga_min.toLocaleString('id-ID')}` : "Harga Bervariasi"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                lineNumber: 152,
+                                                                lineNumber: 155,
                                                                 columnNumber: 19
                                                             }, this)
                                                         ]
@@ -1937,7 +1954,7 @@ function DetailKulinerPage() {
                                                         kulinerId: item.id.toString()
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                        lineNumber: 159,
+                                                        lineNumber: 162,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1948,7 +1965,7 @@ function DetailKulinerPage() {
                                                                 className: "w-5 h-5"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                lineNumber: 164,
+                                                                lineNumber: 167,
                                                                 columnNumber: 19
                                                             }, this),
                                                             " ",
@@ -1956,13 +1973,13 @@ function DetailKulinerPage() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                        lineNumber: 160,
+                                                        lineNumber: 163,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                lineNumber: 158,
+                                                lineNumber: 161,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1975,14 +1992,14 @@ function DetailKulinerPage() {
                                                                 className: "w-6 h-6 text-[#a64029]"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                lineNumber: 171,
+                                                                lineNumber: 174,
                                                                 columnNumber: 19
                                                             }, this),
                                                             " Tentang Hidangan"
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                        lineNumber: 170,
+                                                        lineNumber: 173,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1990,14 +2007,14 @@ function DetailKulinerPage() {
                                                         children: item.deskripsi_ringkas
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                        lineNumber: 173,
+                                                        lineNumber: 176,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "h-px bg-white/50 w-full mb-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                        lineNumber: 174,
+                                                        lineNumber: 177,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2005,13 +2022,13 @@ function DetailKulinerPage() {
                                                         children: item.deskripsi_lengkap
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                        lineNumber: 175,
+                                                        lineNumber: 178,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                lineNumber: 169,
+                                                lineNumber: 172,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2023,14 +2040,14 @@ function DetailKulinerPage() {
                                                                 className: "w-5 h-5 text-[#a64029]"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                lineNumber: 181,
+                                                                lineNumber: 184,
                                                                 columnNumber: 19
                                                             }, this),
                                                             " Pesan Delivery Sekarang:"
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                        lineNumber: 180,
+                                                        lineNumber: 183,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2043,7 +2060,7 @@ function DetailKulinerPage() {
                                                                 children: "GoFood"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                lineNumber: 184,
+                                                                lineNumber: 187,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2053,7 +2070,7 @@ function DetailKulinerPage() {
                                                                 children: "GrabFood"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                lineNumber: 191,
+                                                                lineNumber: 194,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2063,19 +2080,19 @@ function DetailKulinerPage() {
                                                                 children: "ShopeeFood"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                lineNumber: 198,
+                                                                lineNumber: 201,
                                                                 columnNumber: 19
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                        lineNumber: 183,
+                                                        lineNumber: 186,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                lineNumber: 179,
+                                                lineNumber: 182,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2085,7 +2102,7 @@ function DetailKulinerPage() {
                                                         children: "Rahasia & Cara Pembuatan"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                        lineNumber: 210,
+                                                        lineNumber: 213,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2099,17 +2116,17 @@ function DetailKulinerPage() {
                                                                             children: b
                                                                         }, i, false, {
                                                                             fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                            lineNumber: 215,
+                                                                            lineNumber: 218,
                                                                             columnNumber: 25
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                    lineNumber: 213,
+                                                                    lineNumber: 216,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                lineNumber: 212,
+                                                                lineNumber: 215,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$accordion$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AccordionItem"], {
@@ -2121,29 +2138,29 @@ function DetailKulinerPage() {
                                                                             children: l
                                                                         }, i, false, {
                                                                             fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                            lineNumber: 222,
+                                                                            lineNumber: 225,
                                                                             columnNumber: 25
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                    lineNumber: 220,
+                                                                    lineNumber: 223,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                                lineNumber: 219,
+                                                                lineNumber: 222,
                                                                 columnNumber: 19
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                        lineNumber: 211,
+                                                        lineNumber: 214,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                                lineNumber: 209,
+                                                lineNumber: 212,
                                                 columnNumber: 15
                                             }, this)
                                         ]
@@ -2160,14 +2177,16 @@ function DetailKulinerPage() {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "mt-24 border-t border-[#3b2f2f]/5 pt-12",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$reviews$2d$section$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$reviews$2d$section$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                    culinaryId: item?.id?.toString()
+                                }, void 0, false, {
                                     fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                    lineNumber: 233,
+                                    lineNumber: 236,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                                lineNumber: 232,
+                                lineNumber: 235,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -2184,7 +2203,7 @@ function DetailKulinerPage() {
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$footer$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/app/kuliner/[id]/page.tsx",
-                lineNumber: 237,
+                lineNumber: 240,
                 columnNumber: 7
             }, this)
         ]

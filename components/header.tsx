@@ -29,10 +29,10 @@ export default function Header() {
   }
 
   // Mencegah Hydration Error
-  if (!mounted) return <header className="h-[73px] bg-[#f4e8d1] border-b border-[#3b2f2f]/10"></header>
+  if (!mounted) return <header className="h-[56px] bg-[#f4e8d1] border-b border-[#3b2f2f]/10"></header>
 
   return (
-    <header className="sticky top-0 z-50 bg-[#f4e8d1]/95 backdrop-blur-md border-b border-[#3b2f2f]/10 py-4 font-sans">
+    <header className="sticky top-0 z-50 bg-[#f4e8d1]/95 backdrop-blur-md border-b border-[#3b2f2f]/10 py-3 font-sans">
       <nav className="container mx-auto px-5 flex justify-between items-center max-w-7xl">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 font-serif font-bold text-2xl text-[#A64029] hover:opacity-80 transition-all no-underline">

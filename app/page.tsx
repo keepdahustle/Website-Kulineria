@@ -50,7 +50,8 @@ export default function Home() {
   // FIX: Mapping & Filtering Data agar Harga Muncul
   const displayItems = data.kuliner.filter((item: any) => 
     item.nama?.toLowerCase().includes(searchQuery) || 
-    item.kota?.toLowerCase().includes(searchQuery)
+    item.kota?.toLowerCase().includes(searchQuery) ||
+    item.provinsi?.toLowerCase().includes(searchQuery)
   ).map((item: any) => ({
     ...item,
     title: item.nama, // Mapping 'nama' -> 'title'
@@ -68,7 +69,7 @@ export default function Home() {
           onSearch={handleSearch} 
         />
         
-        <div className="sticky top-[80px] z-40 bg-[#f4e8d1]/95 backdrop-blur-md py-2 border-b border-[#3b2f2f]/10">
+        <div className="sticky top-[56px] z-40 bg-[#f4e8d1]/95 backdrop-blur-md py-1 border-b border-[#3b2f2f]/10">
           <FilterBar 
             kategori={data.kategori} 
             onFilterChange={handleFilterChange} 
@@ -76,8 +77,8 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-8 px-4">
-             <h2 className="text-2xl md:text-4xl font-serif font-bold text-[#3b2f2f]">Kuliner Populer Nusantara</h2>
+          <div className="flex flex-col items-center justify-center gap-2 mb-6 px-4 pt-6">
+             <h2 className="text-2xl md:text-4xl font-serif font-bold text-[#3b2f2f] text-center">Kuliner Populer Nusantara</h2>
              <span className="text-xs font-bold text-gray-400 uppercase tracking-widest bg-white px-4 py-2 rounded-full border border-gray-100 shadow-sm">
                 {displayItems.length} Item Ditemukan
              </span>

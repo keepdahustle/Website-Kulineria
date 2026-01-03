@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 
@@ -70,9 +71,11 @@ export function FAQSection() {
               </p>
             </div>
           </div>
-          <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 rounded-xl">
-            Portal UMKM
-          </Button>
+          <Link href="/umkm/auth" className="w-full">
+            <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 rounded-xl">
+              Portal UMKM
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

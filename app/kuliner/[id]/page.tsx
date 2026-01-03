@@ -147,9 +147,12 @@ export default function DetailKulinerPage() {
                   {item.kategori}
                 </Badge>
                 <h1 className="font-serif text-5xl text-[#a64029] leading-tight mb-4 font-bold">{item.nama}</h1>
-                <div className="flex items-center gap-6 bg-white/30 w-fit p-3 rounded-2xl border border-white">
-                  <RatingStars rating={Math.round(item.rating)} />
-                  <span className="text-2xl font-bold text-[#3b2f2f]">
+                <div className="flex items-center gap-4 flex-wrap">
+                  <div className="flex items-center gap-2 bg-white/30 px-4 py-2 rounded-2xl border border-white">
+                    <RatingStars rating={Math.round(item.rating)} />
+                    <span className="text-sm font-bold text-[#3b2f2f]">{item.rating > 0 ? item.rating.toFixed(1) : "0.0"}</span>
+                  </div>
+                  <span className="text-2xl font-bold text-[#3b2f2f] bg-white/30 px-4 py-2 rounded-2xl border border-white">
                     {item.harga_min ? `Rp ${item.harga_min.toLocaleString('id-ID')}` : "Harga Bervariasi"}
                   </span>
                 </div>
@@ -230,7 +233,7 @@ export default function DetailKulinerPage() {
 
           {/* Section Review (Client-side Interaction) */}
           <div className="mt-24 border-t border-[#3b2f2f]/5 pt-12">
-            <ReviewsSection />
+            <ReviewsSection culinaryId={item?.id?.toString()} />
           </div>
         </article>
       </main>

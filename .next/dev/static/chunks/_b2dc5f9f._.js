@@ -45,14 +45,14 @@ function Header() {
     };
     // Mencegah Hydration Error
     if (!mounted) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
-        className: "h-[73px] bg-[#f4e8d1] border-b border-[#3b2f2f]/10"
+        className: "h-[56px] bg-[#f4e8d1] border-b border-[#3b2f2f]/10"
     }, void 0, false, {
         fileName: "[project]/components/header.tsx",
         lineNumber: 32,
         columnNumber: 24
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
-        className: "sticky top-0 z-50 bg-[#f4e8d1]/95 backdrop-blur-md border-b border-[#3b2f2f]/10 py-4 font-sans",
+        className: "sticky top-0 z-50 bg-[#f4e8d1]/95 backdrop-blur-md border-b border-[#3b2f2f]/10 py-3 font-sans",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
             className: "container mx-auto px-5 flex justify-between items-center max-w-7xl",
             children: [

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Search } from "lucide-react"
 
@@ -12,20 +12,9 @@ interface HeroSectionProps {
 
 export function HeroSection({ kategori, kota, onSearch }: HeroSectionProps) {
   const [searchInput, setSearchInput] = useState("")
-  const [suggestions, setSuggestions] = useState<string[]>([])
-
-  useEffect(() => {
-    const allSuggestions = [...kategori, ...kota.slice(0, 3)]
-    setSuggestions(allSuggestions.slice(0, 6))
-  }, [kategori, kota])
 
   const handleSearch = () => {
     onSearch(searchInput)
-  }
-
-  const handleSuggestionClick = (suggestion: string) => {
-    setSearchInput(suggestion)
-    onSearch(suggestion)
   }
 
   return (
@@ -60,26 +49,6 @@ export function HeroSection({ kategori, kota, onSearch }: HeroSectionProps) {
               Cari
             </Button>
           </div>
-        </div>
-
-        <div className="max-w-2xl mx-auto mb-10">
-          <div className="flex flex-wrap gap-2 justify-center">
-            {suggestions.map((suggestion) => (
-              <button
-                key={suggestion}
-                onClick={() => handleSuggestionClick(suggestion)}
-                className="px-4 py-2 rounded-full bg-muted/20 text-muted hover:bg-muted/40 text-sm font-medium transition-colors border border-muted/30 focus:ring-2 focus:ring-ring focus:outline-none"
-              >
-                {suggestion}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex justify-center">
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-xl font-bold text-lg">
-            Jelajah Kuliner
-          </Button>
         </div>
       </div>
     </section>
