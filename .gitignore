@@ -1,1 +1,7 @@
+.next
 node_modules
+
+backend/vendor
+backend/.env
+backend/storage/logs
+backend/storage/framework
